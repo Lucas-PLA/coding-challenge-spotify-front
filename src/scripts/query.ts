@@ -9,8 +9,10 @@ export interface Album {
 }
 
 const SPOTIFY_SEARCH_URL = 'https://api.spotify.com/v1/search';
+const ADD_TO_LIBRARY_URL = 'http://localhost:8080/album/';
+
 //TODO : requête pour récupérer le jeton d'authentification
-const token = "BQCtrNKS-eqGFr6Ed49nW4ifD0DG-GZ8Hi3fWjBqtx5KNzfsajsq-kglDWrIiMUE5yBnG0ZBckbzpcYouR4";
+const token = "BQBhAu57-voMziHex0RDAgcAHS6jQQoBFPpP2Udog6Xr3Fm7PXcjnLWkjN4b6nYthOw_5N8u3lL8hIw5QgQ";
 
 export const queryAlbumsWithFilter = (filter : string) => {
 	let albumsToReturn : Album[] = [];
@@ -25,4 +27,10 @@ export const queryAlbumsWithFilter = (filter : string) => {
 		.catch(error => console.log(error));
 	
 	return albumsToReturn;
+}
+
+//TODO : mettre à jour la vue pour griser le bouton si l'appel est effectué avec succes
+export const addAlbumToPersonnalLibrary = (albumId : string) => {
+	axios.put(ADD_TO_LIBRARY_URL + albumId)
+	.catch(error => console.log(error))
 }

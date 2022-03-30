@@ -1,13 +1,16 @@
 <script setup>
 	import { ref } from 'vue';
-	import { queryAlbumsWithFilter } from '../scripts/query';
+	import { queryAlbumsWithFilter, addAlbumToPersonnalLibrary } from '../scripts/query';
 
 	const researchFilter = ref("");
 	const albums = ref([]);
 
 	function search() {
-		// TODO : récupérer de manière asynchrone
 		albums.value = queryAlbumsWithFilter(researchFilter.value);
+	}
+
+	function addToLibrary(albumId) {
+		addAlbumToPersonnalLibrary(albumId);
 	}
 </script>
 
@@ -36,6 +39,9 @@
 						<td>{{album.releaseDate}}</td>
 						<td>{{album.nbTracks}}</td>
 						<td><img src={{album.imageUrl}} /></td>
+						<td>
+							<button @click='addToLibrary(album.id)'>&lt;3</button>
+						</td>
 					</tr>
 				</template>
 			</tbody>
